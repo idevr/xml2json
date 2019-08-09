@@ -10,6 +10,7 @@
     "dist/"
   ],
   "scripts": {
+    "git:commit": "git-cz",
     "npm:version:major": "npm version major --no-git-tag-version",
     "npm:version:minor": "npm version minor --no-git-tag-version",
     "npm:version:patch": "npm version patch --no-git-tag-version"
@@ -25,5 +26,14 @@
   "bugs": {
     "url": "https://github.com/rapidevelop/xml2json/issues"
   },
-  "homepage": "https://github.com/rapidevelop/xml2json#readme"
+  "homepage": "https://github.com/rapidevelop/xml2json#readme",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2"
+  }
 }

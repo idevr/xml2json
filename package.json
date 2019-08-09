@@ -1,0 +1,29 @@
+{
+  "name": "@rapidevelop/xml2json",
+  "version": "1.0.0",
+  "description": "XML2JSON is a library to convert a XML file or XML text string to JSON.",
+  "main": "dist/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "npm:version:major": "npm version major --no-git-tag-version",
+    "npm:version:minor": "npm version minor --no-git-tag-version",
+    "npm:version:patch": "npm version patch --no-git-tag-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rapidevelop/xml2json.git"
+  },
+  "keywords": [],
+  "author": "Iman Vafadarnezhad",
+  "license": "MIT",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/rapidevelop/xml2json/issues"
+  },
+  "homepage": "https://github.com/rapidevelop/xml2json#readme"
+}

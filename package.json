@@ -18,8 +18,10 @@
     "test:type:watch": "npm run test:type -- --watch",
     "build:type": "tsc --emitDeclarationOnly",
     "build:js": "gulp build:js",
-    "build:js:watch": "gulp build:w",
-    "build": "npm run build:type && npm run build:js"
+    "build:es": "gulp build:es",
+    "build:docs": "gulp build:docs",
+    "build": "npm run build:type && npm run build:js",
+    "build:watch": "gulp build:w"
   },
   "repository": {
     "type": "git",
@@ -53,7 +55,9 @@
     "del": "^5.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
+    "gulp-jsdoc3": "^2.0.0",
     "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^5.0.1",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },

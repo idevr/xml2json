@@ -3,6 +3,55 @@ const {
 } = require('gulp');
 const clean = require('del');
 
+// JSDoc
+
+const jsdoc = require('gulp-jsdoc3');
+const jsdocConfig = require('./jsdoc.config.js');
+
+function cleanDocs() {
+  console.log('Cleaning docs directory.');
+  return clean([
+    './docs/**/*',
+  ]);
+}
+
+function generateDocs() {
+  console.log('Generating documentation.');
+  return src([
+    './tmp/src.es/**/*.js'
+  ], { read: false })
+    .pipe(jsdoc(jsdocConfig));
+}
+
+// TypeScript
+
+const typescript = require('gulp-typescript');
+
+function cleanES() {
+  console.log('Cleaning ECMAScript compatible files located in "tmp/src.es" directory.');
+  return clean([
+    './tmp/src.es/**/*',
+  ]);
+}
+
+const tsProject = typescript.createProject({
+  allowSyntheticDefaultImports: true,
+  declaration: false,
+  esModuleInterop: true,
+  module: 'es2015',
+  moduleResolution: 'node',
+  target: 'ES2015'
+});
+
+function generateES() {
+  console.log('Generating ECMAScript compatible files in "tmp/src.es".');
+  return src([
+    './src/**/*.ts',
+  ])
+    .pipe(tsProject())
+    .pipe(dest('tmp/src.es'));
+};
+
 // Babel
 
 const babel = require('gulp-babel');
@@ -41,15 +90,21 @@ function watchSourceFiles() {
     './src/**/*.ts',
     '!./src/**/*.types.d.ts',
   ], parallel(
-    series(cleanCompiledFiles, compileSourceFiles)
+    series(cleanCompiledFiles, compileSourceFiles),
+    series(cleanES, generateES, cleanDocs, generateDocs)
   ));
 }
 
 module.exports = {
-  build: series(
-    cleanDist,
-    compileSourceFiles
+  build: parallel(
+    series(
+      cleanDist,
+      compileSourceFiles
+    ),
+    series(cleanES, generateES, cleanDocs, generateDocs)
   ),
   'build:js': series(cleanCompiledFiles, compileSourceFiles),
-  'build:w': parallel(watchSourceFiles),
+  'build:es': series(cleanES, generateES),
+  'build:docs': series(cleanES, generateES, cleanDocs, generateDocs),
+  'build:w': watchSourceFiles,
 };

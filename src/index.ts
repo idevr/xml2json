@@ -1,3 +1,4 @@
+/** @module XML2JSON */
 import fs from 'fs';
 import request from 'request';
 import sax from 'sax';
@@ -7,6 +8,8 @@ export default class XML2JSON {
   /**
    * Parses a XML file that is located on a remote server.
    *
+   * @instance
+   * @public
    * @param {string} url - URL of XML file.
    * @param {function} callback - Callback function that will be called after
    * it done processing XML file.
@@ -47,6 +50,8 @@ export default class XML2JSON {
   /**
    * Parses an XML file that is located on local file system.
    *
+   * @instance
+   * @public
    * @param {string} filePath - XML file absolute path.
    * @param {function} callback - Callback function that should be called after
    * it done processing XML file.
@@ -67,6 +72,8 @@ export default class XML2JSON {
   /**
    * Parses a XML text string to a JSON object.
    *
+   * @instance
+   * @public
    * @param {string} xmlSource - XML text string.
    * @param {function} callback - Callback function that will be called after
    * it done processing XML.
@@ -153,6 +160,15 @@ export default class XML2JSON {
     parser.write(xmlSource).close();
   }
 
+  /**
+   * Returns the current property by the given path.
+   *
+   * @instance
+   * @private
+   * @param {object} object - The JSON object to search in.
+   * @param {Array<string | number>} currentPropertyPath - Current property path.
+   * @returns {object} - Current property.
+   */
   private getObjectPropertyByPath(
     object: Types.Xml.Node,
     currentPropertyPath: Array<string | number>,
@@ -177,6 +193,8 @@ export default class XML2JSON {
   /**
    * Adds the current node as last segment of the current path.
    *
+   * @instance
+   * @private
    * @param {string | number} pathName - Node's tag name.
    * @param {Array<string | number>} currentPropertyPath - Current property path.
    */
@@ -190,6 +208,8 @@ export default class XML2JSON {
   /**
    * Removes the last segment of the current path.
    *
+   * @instance
+   * @private
    * @param {Array<string | number>} currentPropertyPath - Current property path.
    */
   private pathBackward(currentPropertyPath: Array<string | number>): void {

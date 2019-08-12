@@ -9,6 +9,19 @@ npm install --save @rapidevelop/xml2json
 ```
 
 ## Commands
-```npm run version:[major|minor|patch]``` Bumps the package version.
-
-```npm run git:commit``` Commits changes using commitizen.
+Bumps the package version.
+```
+npm run version:[major|minor|patch]
+```
+Commits changes using commitizen.
+```
+npm run git:commit
+```
+Generates an ECMAScript compatible version of TypeScript files.
+```
+npm run build:es
+```
+Generates documentation.
+```
+npm run build:docs
+```

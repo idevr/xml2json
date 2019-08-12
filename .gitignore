@@ -1,6 +1,5 @@
 .DS_Store
 .vscode/
 dist/
-docs/
 node_modules/
 tmp/

@@ -1,7 +1,27 @@
+import fs from 'fs';
 import sax from 'sax';
 import { Types } from './index.types';
 
 export default class XML2JSON {
+  /**
+   * Parses an XML file that is located on local file system.
+   *
+   * @param {string} filePath - XML file absolute path.
+   * @param {function} callback - Callback function that should be called after
+   * it done processing XML file.
+   */
+  public parseFromFile(
+    filePath: string,
+    callback: (error: Error | null, data: Types.Xml.Node | null) => void,
+  ) {
+    fs.readFile(filePath, { encoding: 'utf-8' }, (error, data) => {
+      if (!error) {
+        this.parseFromText(data, callback);
+      } else {
+        callback(error, null);
+      }
+    });
+  }
 
   /**
    * Parses a XML text string to a JSON object.

@@ -1,8 +1,49 @@
 import fs from 'fs';
+import request from 'request';
 import sax from 'sax';
 import { Types } from './index.types';
 
 export default class XML2JSON {
+  /**
+   * Parses a XML file that is located on a remote server.
+   *
+   * @param {string} url - URL of XML file.
+   * @param {function} callback - Callback function that will be called after
+   * it done processing XML file.
+   * @param {boolean} [followRedirect=true] - Indicate whether we want to
+   * follow HTTP redirects or not.
+   * @param {number} [maxRedirects=10] - Maximum number of HTTP redirects we
+   * want to follow.
+   * @param {string} [encoding='UTF8'] - Response encoding.
+   * @param {number} [timeout=10000] - Maximum time in milliseconds that we
+   * want to wait for server response.
+   */
+  public parseFromUrl(
+    url: string,
+    callback: (error: Error | null, data: Types.Xml.Node | null) => void,
+    followRedirect: boolean = true,
+    maxRedirects: number = 10,
+    encoding: string = 'UTF8',
+    timeout: number = 10000,
+  ) {
+    request.get({
+      uri: url,
+      method: 'GET',
+      followRedirect,
+      maxRedirects,
+      encoding,
+      timeout,
+    }).on('response', (response) => {
+      if (response.statusCode === 200) {
+        this.parseFromText(response.body, callback);
+      } else {
+        callback(new Error(`An HTTP error occurred with status code: ${response.statusCode}`), null);
+      }
+    }).on('error', (error) => {
+      callback(new Error(`An error occurred: ${error}`), null);
+    });
+  }
+
   /**
    * Parses an XML file that is located on local file system.
    *

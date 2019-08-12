@@ -17,7 +17,8 @@
     "test:type": "tsc --noEmit",
     "test:type:watch": "npm run test:type -- --watch",
     "build:type": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
+    "build:js": "gulp build:js",
+    "build:js:watch": "gulp build:w",
     "build": "npm run build:type && npm run build:js"
   },
   "repository": {
@@ -49,6 +50,10 @@
     "@types/sax": "^1.2.0",
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
+    "del": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-sourcemaps": "^2.6.5",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },

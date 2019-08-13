@@ -5,9 +5,7 @@
   ],
   "jsRules": {},
   "rules": {
-    "no-console": [
-      false
-    ],
+    "no-console": false,
     "object-literal-sort-keys": false,
     "quotemark": [
       true,

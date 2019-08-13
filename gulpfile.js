@@ -97,10 +97,7 @@ function watchSourceFiles() {
 
 module.exports = {
   build: parallel(
-    series(
-      cleanDist,
-      compileSourceFiles
-    ),
+    series(cleanDist, compileSourceFiles),
     series(cleanES, generateES, cleanDocs, generateDocs)
   ),
   'build:js': series(cleanCompiledFiles, compileSourceFiles),

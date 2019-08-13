@@ -20,7 +20,7 @@
     "build:js": "gulp build:js",
     "build:es": "gulp build:es",
     "build:docs": "gulp build:docs",
-    "build": "npm run build:type && npm run build:js",
+    "build": "gulp build && npm run build:type",
     "build:watch": "gulp build:w",
     "prepare": "npm run build"
   },
@@ -35,7 +35,7 @@
   "bugs": {
     "url": "https://github.com/rapidevelop/xml2json/issues"
   },
-  "homepage": "https://github.com/rapidevelop/xml2json#readme",
+  "homepage": "https://rapidevelop.github.io/xml2json/",
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
